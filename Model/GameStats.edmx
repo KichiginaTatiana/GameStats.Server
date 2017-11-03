@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище GameStats" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\Admin\Desktop\учёбка\Kontur.GameStats.Server\Model\GameStats.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BestPlayers">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="KillToDeathRatio" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GameModes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="GameMode" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Map" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="FragLimit" Type="integer" Nullable="false" />
+          <Property Name="TimeLimit" Type="integer" Nullable="false" />
+          <Property Name="TimeElapsed" Type="real" Nullable="false" />
+          <Property Name="Timestamp" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerStats">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TotalMatchesPlayed" Type="integer" Nullable="false" />
+          <Property Name="TotalMatchesWon" Type="integer" Nullable="false" />
+          <Property Name="FavouriteServer" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="UniqueServers" Type="integer" Nullable="false" />
+          <Property Name="FavouriteGameMode" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="AverageScoreboardPercent" Type="real" Nullable="false" />
+          <Property Name="MaximumMatchesPerDay" Type="integer" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="real" Nullable="false" />
+          <Property Name="LastMatchPlayed" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="KillToDeathRatio" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PopularServers">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecentMatches">
+          <Key>
+            <PropertyRef Name="Timestamp" />
+          </Key>
+          <Property Name="Timestamp" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scoreboards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatchId" Type="integer" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Frags" Type="integer" Nullable="false" />
+          <Property Name="Kills" Type="integer" Nullable="false" />
+          <Property Name="Deaths" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Servers">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServerStats">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="TotalMatchesPlayed" Type="integer" Nullable="false" />
+          <Property Name="MaximumMatchesPerDay" Type="integer" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="real" Nullable="false" />
+          <Property Name="MaximumPopulation" Type="int" Nullable="false" />
+          <Property Name="AveragePopulation" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopFiveGameModes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="GameMode" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TopFiveMaps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Map" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BestPlayers_0_0">
+          <End Role="PlayerStats" Type="Self.PlayerStats" Multiplicity="1" />
+          <End Role="BestPlayers" Type="Self.BestPlayers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerStats">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="BestPlayers">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameModes_0_0">
+          <End Role="Servers" Type="Self.Servers" Multiplicity="1" />
+          <End Role="GameModes" Type="Self.GameModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="GameModes">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matches_0_0">
+          <End Role="Servers" Type="Self.Servers" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Matches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerStats_0_0">
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="1" />
+          <End Role="PlayerStats" Type="Self.PlayerStats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="PlayerStats">
+              <PropertyRef Name="FavouriteServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6035: В связи "FK_PopularServers_0_0" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
+        <Association Name="FK_PopularServers_0_0" />-->
+        <Association Name="FK_PopularServers_1_0">
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="1" />
+          <End Role="PopularServers" Type="Self.PopularServers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="PopularServers">
+              <PropertyRef Name="Endpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecentMatches_0_0">
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="1" />
+          <End Role="RecentMatches" Type="Self.RecentMatches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="RecentMatches">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scoreboards_0_0">
+          <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+          <End Role="Scoreboards" Type="Self.Scoreboards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scoreboards">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServerStats_0_0">
+          <End Role="Servers" Type="Self.Servers" Multiplicity="1" />
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopFiveGameModes_0_0">
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="1" />
+          <End Role="TopFiveGameModes" Type="Self.TopFiveGameModes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="TopFiveGameModes">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopFiveMaps_0_0">
+          <End Role="ServerStats" Type="Self.ServerStats" Multiplicity="1" />
+          <End Role="TopFiveMaps" Type="Self.TopFiveMaps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="TopFiveMaps">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище GameStatsContainer">
+          <EntitySet Name="BestPlayers" EntityType="Self.BestPlayers" store:Type="Tables" />
+          <EntitySet Name="GameModes" EntityType="Self.GameModes" store:Type="Tables" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" store:Type="Tables" />
+          <EntitySet Name="PlayerStats" EntityType="Self.PlayerStats" store:Type="Tables" />
+          <EntitySet Name="PopularServers" EntityType="Self.PopularServers" store:Type="Tables" />
+          <EntitySet Name="RecentMatches" EntityType="Self.RecentMatches" store:Type="Tables" />
+          <EntitySet Name="Scoreboards" EntityType="Self.Scoreboards" store:Type="Tables" />
+          <EntitySet Name="Servers" EntityType="Self.Servers" store:Type="Tables" />
+          <EntitySet Name="ServerStats" EntityType="Self.ServerStats" store:Type="Tables" />
+          <EntitySet Name="TopFiveGameModes" EntityType="Self.TopFiveGameModes" store:Type="Tables" />
+          <EntitySet Name="TopFiveMaps" EntityType="Self.TopFiveMaps" store:Type="Tables" />
+          <AssociationSet Name="FK_BestPlayers_0_0" Association="Self.FK_BestPlayers_0_0">
+            <End Role="PlayerStats" EntitySet="PlayerStats" />
+            <End Role="BestPlayers" EntitySet="BestPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameModes_0_0" Association="Self.FK_GameModes_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="GameModes" EntitySet="GameModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matches_0_0" Association="Self.FK_Matches_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerStats_0_0" Association="Self.FK_PlayerStats_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="PlayerStats" EntitySet="PlayerStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PopularServers_1_0" Association="Self.FK_PopularServers_1_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="PopularServers" EntitySet="PopularServers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecentMatches_0_0" Association="Self.FK_RecentMatches_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="RecentMatches" EntitySet="RecentMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scoreboards_0_0" Association="Self.FK_Scoreboards_0_0">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="Scoreboards" EntitySet="Scoreboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServerStats_0_0" Association="Self.FK_ServerStats_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="ServerStats" EntitySet="ServerStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopFiveGameModes_0_0" Association="Self.FK_TopFiveGameModes_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="TopFiveGameModes" EntitySet="TopFiveGameModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopFiveMaps_0_0" Association="Self.FK_TopFiveMaps_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="TopFiveMaps" EntitySet="TopFiveMaps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GameStats" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BestPlayer">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KillToDeathRatio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="PlayerStat" Relationship="Self.FK_BestPlayers_0_0" FromRole="BestPlayers" ToRole="PlayerStats" />
+        </EntityType>
+        <EntityType Name="GameMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerEndpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Server" Relationship="Self.FK_GameModes_0_0" FromRole="GameModes" ToRole="Servers" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerEndpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GameMode" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Map" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FragLimit" Type="Int64" Nullable="false" />
+          <Property Name="TimeLimit" Type="Int64" Nullable="false" />
+          <Property Name="TimeElapsed" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Server" Relationship="Self.FK_Matches_0_0" FromRole="Matches" ToRole="Servers" />
+          <NavigationProperty Name="Scoreboards" Relationship="Self.FK_Scoreboards_0_0" FromRole="Matches" ToRole="Scoreboards" />
+        </EntityType>
+        <EntityType Name="PlayerStat">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalMatchesPlayed" Type="Int64" Nullable="false" />
+          <Property Name="TotalMatchesWon" Type="Int64" Nullable="false" />
+          <Property Name="FavouriteServer" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UniqueServers" Type="Int64" Nullable="false" />
+          <Property Name="FavouriteGameMode" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AverageScoreboardPercent" Type="Double" Nullable="false" />
+          <Property Name="MaximumMatchesPerDay" Type="Int64" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="Double" Nullable="false" />
+          <Property Name="LastMatchPlayed" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KillToDeathRatio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BestPlayer" Relationship="Self.FK_BestPlayers_0_0" FromRole="PlayerStats" ToRole="BestPlayers" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_PlayerStats_0_0" FromRole="PlayerStats" ToRole="ServerStats" />
+        </EntityType>
+        <EntityType Name="PopularServer">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_PopularServers_1_0" FromRole="PopularServers" ToRole="ServerStats" />
+        </EntityType>
+        <EntityType Name="RecentMatch">
+          <Key>
+            <PropertyRef Name="Timestamp" />
+          </Key>
+          <Property Name="Timestamp" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServerEndpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_RecentMatches_0_0" FromRole="RecentMatches" ToRole="ServerStats" />
+        </EntityType>
+        <EntityType Name="Scoreboard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatchId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Frags" Type="Int64" Nullable="false" />
+          <Property Name="Kills" Type="Int64" Nullable="false" />
+          <Property Name="Deaths" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Match" Relationship="Self.FK_Scoreboards_0_0" FromRole="Scoreboards" ToRole="Matches" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GameModes" Relationship="Self.FK_GameModes_0_0" FromRole="Servers" ToRole="GameModes" />
+          <NavigationProperty Name="Matches" Relationship="Self.FK_Matches_0_0" FromRole="Servers" ToRole="Matches" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_ServerStats_0_0" FromRole="Servers" ToRole="ServerStats" />
+        </EntityType>
+        <EntityType Name="ServerStat">
+          <Key>
+            <PropertyRef Name="Endpoint" />
+          </Key>
+          <Property Name="Endpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TotalMatchesPlayed" Type="Int64" Nullable="false" />
+          <Property Name="MaximumMatchesPerDay" Type="Int64" Nullable="false" />
+          <Property Name="AverageMatchesPerDay" Type="Double" Nullable="false" />
+          <Property Name="MaximumPopulation" Type="Int32" Nullable="false" />
+          <Property Name="AveragePopulation" Type="Double" Nullable="false" />
+          <NavigationProperty Name="PlayerStats" Relationship="Self.FK_PlayerStats_0_0" FromRole="ServerStats" ToRole="PlayerStats" />
+          <NavigationProperty Name="PopularServer" Relationship="Self.FK_PopularServers_1_0" FromRole="ServerStats" ToRole="PopularServers" />
+          <NavigationProperty Name="RecentMatches" Relationship="Self.FK_RecentMatches_0_0" FromRole="ServerStats" ToRole="RecentMatches" />
+          <NavigationProperty Name="Server" Relationship="Self.FK_ServerStats_0_0" FromRole="ServerStats" ToRole="Servers" />
+          <NavigationProperty Name="TopFiveGameModes" Relationship="Self.FK_TopFiveGameModes_0_0" FromRole="ServerStats" ToRole="TopFiveGameModes" />
+          <NavigationProperty Name="TopFiveMaps" Relationship="Self.FK_TopFiveMaps_0_0" FromRole="ServerStats" ToRole="TopFiveMaps" />
+        </EntityType>
+        <EntityType Name="TopFiveGameMode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerEndpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GameMode" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_TopFiveGameModes_0_0" FromRole="TopFiveGameModes" ToRole="ServerStats" />
+        </EntityType>
+        <EntityType Name="TopFiveMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerEndpoint" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Map" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ServerStat" Relationship="Self.FK_TopFiveMaps_0_0" FromRole="TopFiveMaps" ToRole="ServerStats" />
+        </EntityType>
+        <Association Name="FK_BestPlayers_0_0">
+          <End Role="PlayerStats" Type="Self.PlayerStat" Multiplicity="1" />
+          <End Role="BestPlayers" Type="Self.BestPlayer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PlayerStats">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="BestPlayers">
+              <PropertyRef Name="Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GameModes_0_0">
+          <End Role="Servers" Type="Self.Server" Multiplicity="1" />
+          <End Role="GameModes" Type="Self.GameMode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="GameModes">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matches_0_0">
+          <End Role="Servers" Type="Self.Server" Multiplicity="1" />
+          <End Role="Matches" Type="Self.Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="Matches">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scoreboards_0_0">
+          <End Role="Matches" Type="Self.Match" Multiplicity="1" />
+          <End Role="Scoreboards" Type="Self.Scoreboard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scoreboards">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlayerStats_0_0">
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="1" />
+          <End Role="PlayerStats" Type="Self.PlayerStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="PlayerStats">
+              <PropertyRef Name="FavouriteServer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PopularServers_1_0">
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="1" />
+          <End Role="PopularServers" Type="Self.PopularServer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="PopularServers">
+              <PropertyRef Name="Endpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecentMatches_0_0">
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="1" />
+          <End Role="RecentMatches" Type="Self.RecentMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="RecentMatches">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServerStats_0_0">
+          <End Role="Servers" Type="Self.Server" Multiplicity="1" />
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Servers">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopFiveGameModes_0_0">
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="1" />
+          <End Role="TopFiveGameModes" Type="Self.TopFiveGameMode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="TopFiveGameModes">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TopFiveMaps_0_0">
+          <End Role="ServerStats" Type="Self.ServerStat" Multiplicity="1" />
+          <End Role="TopFiveMaps" Type="Self.TopFiveMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServerStats">
+              <PropertyRef Name="Endpoint" />
+            </Principal>
+            <Dependent Role="TopFiveMaps">
+              <PropertyRef Name="ServerEndpoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BestPlayers" EntityType="Self.BestPlayer" />
+          <EntitySet Name="GameModes" EntityType="Self.GameMode" />
+          <EntitySet Name="Matches" EntityType="Self.Match" />
+          <EntitySet Name="PlayerStats" EntityType="Self.PlayerStat" />
+          <EntitySet Name="PopularServers" EntityType="Self.PopularServer" />
+          <EntitySet Name="RecentMatches" EntityType="Self.RecentMatch" />
+          <EntitySet Name="Scoreboards" EntityType="Self.Scoreboard" />
+          <EntitySet Name="Servers" EntityType="Self.Server" />
+          <EntitySet Name="ServerStats" EntityType="Self.ServerStat" />
+          <EntitySet Name="TopFiveGameModes" EntityType="Self.TopFiveGameMode" />
+          <EntitySet Name="TopFiveMaps" EntityType="Self.TopFiveMap" />
+          <AssociationSet Name="FK_BestPlayers_0_0" Association="Self.FK_BestPlayers_0_0">
+            <End Role="PlayerStats" EntitySet="PlayerStats" />
+            <End Role="BestPlayers" EntitySet="BestPlayers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GameModes_0_0" Association="Self.FK_GameModes_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="GameModes" EntitySet="GameModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matches_0_0" Association="Self.FK_Matches_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="Matches" EntitySet="Matches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scoreboards_0_0" Association="Self.FK_Scoreboards_0_0">
+            <End Role="Matches" EntitySet="Matches" />
+            <End Role="Scoreboards" EntitySet="Scoreboards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlayerStats_0_0" Association="Self.FK_PlayerStats_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="PlayerStats" EntitySet="PlayerStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PopularServers_1_0" Association="Self.FK_PopularServers_1_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="PopularServers" EntitySet="PopularServers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecentMatches_0_0" Association="Self.FK_RecentMatches_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="RecentMatches" EntitySet="RecentMatches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServerStats_0_0" Association="Self.FK_ServerStats_0_0">
+            <End Role="Servers" EntitySet="Servers" />
+            <End Role="ServerStats" EntitySet="ServerStats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopFiveGameModes_0_0" Association="Self.FK_TopFiveGameModes_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="TopFiveGameModes" EntitySet="TopFiveGameModes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TopFiveMaps_0_0" Association="Self.FK_TopFiveMaps_0_0">
+            <End Role="ServerStats" EntitySet="ServerStats" />
+            <End Role="TopFiveMaps" EntitySet="TopFiveMaps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище GameStatsContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="BestPlayers">
+            <EntityTypeMapping TypeName="GameStats.BestPlayer">
+              <MappingFragment StoreEntitySet="BestPlayers">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="KillToDeathRatio" ColumnName="KillToDeathRatio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GameModes">
+            <EntityTypeMapping TypeName="GameStats.GameMode">
+              <MappingFragment StoreEntitySet="GameModes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerEndpoint" ColumnName="ServerEndpoint" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="GameStats.Match">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerEndpoint" ColumnName="ServerEndpoint" />
+                <ScalarProperty Name="GameMode" ColumnName="GameMode" />
+                <ScalarProperty Name="Map" ColumnName="Map" />
+                <ScalarProperty Name="FragLimit" ColumnName="FragLimit" />
+                <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+                <ScalarProperty Name="TimeElapsed" ColumnName="TimeElapsed" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayerStats">
+            <EntityTypeMapping TypeName="GameStats.PlayerStat">
+              <MappingFragment StoreEntitySet="PlayerStats">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalMatchesPlayed" ColumnName="TotalMatchesPlayed" />
+                <ScalarProperty Name="TotalMatchesWon" ColumnName="TotalMatchesWon" />
+                <ScalarProperty Name="FavouriteServer" ColumnName="FavouriteServer" />
+                <ScalarProperty Name="UniqueServers" ColumnName="UniqueServers" />
+                <ScalarProperty Name="FavouriteGameMode" ColumnName="FavouriteGameMode" />
+                <ScalarProperty Name="AverageScoreboardPercent" ColumnName="AverageScoreboardPercent" />
+                <ScalarProperty Name="MaximumMatchesPerDay" ColumnName="MaximumMatchesPerDay" />
+                <ScalarProperty Name="AverageMatchesPerDay" ColumnName="AverageMatchesPerDay" />
+                <ScalarProperty Name="LastMatchPlayed" ColumnName="LastMatchPlayed" />
+                <ScalarProperty Name="KillToDeathRatio" ColumnName="KillToDeathRatio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PopularServers">
+            <EntityTypeMapping TypeName="GameStats.PopularServer">
+              <MappingFragment StoreEntitySet="PopularServers">
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AverageMatchesPerDay" ColumnName="AverageMatchesPerDay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecentMatches">
+            <EntityTypeMapping TypeName="GameStats.RecentMatch">
+              <MappingFragment StoreEntitySet="RecentMatches">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="ServerEndpoint" ColumnName="ServerEndpoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scoreboards">
+            <EntityTypeMapping TypeName="GameStats.Scoreboard">
+              <MappingFragment StoreEntitySet="Scoreboards">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Frags" ColumnName="Frags" />
+                <ScalarProperty Name="Kills" ColumnName="Kills" />
+                <ScalarProperty Name="Deaths" ColumnName="Deaths" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servers">
+            <EntityTypeMapping TypeName="GameStats.Server">
+              <MappingFragment StoreEntitySet="Servers">
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServerStats">
+            <EntityTypeMapping TypeName="GameStats.ServerStat">
+              <MappingFragment StoreEntitySet="ServerStats">
+                <ScalarProperty Name="Endpoint" ColumnName="Endpoint" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalMatchesPlayed" ColumnName="TotalMatchesPlayed" />
+                <ScalarProperty Name="MaximumMatchesPerDay" ColumnName="MaximumMatchesPerDay" />
+                <ScalarProperty Name="AverageMatchesPerDay" ColumnName="AverageMatchesPerDay" />
+                <ScalarProperty Name="MaximumPopulation" ColumnName="MaximumPopulation" />
+                <ScalarProperty Name="AveragePopulation" ColumnName="AveragePopulation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopFiveGameModes">
+            <EntityTypeMapping TypeName="GameStats.TopFiveGameMode">
+              <MappingFragment StoreEntitySet="TopFiveGameModes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerEndpoint" ColumnName="ServerEndpoint" />
+                <ScalarProperty Name="GameMode" ColumnName="GameMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TopFiveMaps">
+            <EntityTypeMapping TypeName="GameStats.TopFiveMap">
+              <MappingFragment StoreEntitySet="TopFiveMaps">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerEndpoint" ColumnName="ServerEndpoint" />
+                <ScalarProperty Name="Map" ColumnName="Map" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
